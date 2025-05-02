@@ -30,11 +30,12 @@ public class EnemyController : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance <= shootInterval)
+        if (distance <= shootRange)
         {
-            // Shooting
             animator.SetBool("isShooting", true);
             animator.SetBool("isRunning", false);
+
+            LookAtPlayer();
 
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootInterval)
@@ -43,15 +44,25 @@ public class EnemyController : MonoBehaviour
                 shootTimer = 0f;
             }
         }
-        else
+        else if (distance <= detectionRange)
         {
-            // Running
             animator.SetBool("isShooting", false);
             animator.SetBool("isRunning", true);
-
-            // ADD THIS:
             MoveTowardsPlayer();
         }
+        else
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0; 
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
     }
 
     private void MoveTowardsPlayer()

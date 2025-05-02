@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     private bool isGrounded = true; // looking for ground to make sure can jump
 
+    private bool isDead = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,10 +44,6 @@ public class Player : MonoBehaviour
             TakeDamage(15);
         }
 
-        if (currentHealth <= 0)
-        {
-            SceneManager.LoadScene(endScene);
-        }
         if ((jumpButton != null && jumpButton.Pressed) || Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
@@ -54,23 +52,24 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Keyboard input
         float moveInputKeyboard = Input.GetAxis("Vertical");
         float rotateInputKeyboard = Input.GetAxis("Horizontal");
 
-        // Joystick input
         float moveInputJoystick = joystick != null ? joystick.Vertical : 0f;
         float rotateInputJoystick = joystick != null ? joystick.Horizontal : 0f;
 
-        // Combine both inputs
         float moveInput = Mathf.Abs(moveInputKeyboard) > Mathf.Abs(moveInputJoystick) ? moveInputKeyboard : moveInputJoystick;
         float rotateInput = Mathf.Abs(rotateInputKeyboard) > Mathf.Abs(rotateInputJoystick) ? rotateInputKeyboard : rotateInputJoystick;
 
         float move = moveInput * moveSpeed * Time.deltaTime;
         float rotate = rotateInput * rotateSpeed * Time.deltaTime;
 
-        transform.Translate(0, 0, move);
+        // Rotate using transform
         transform.Rotate(0, rotate, 0);
+
+        // Move using Rigidbody
+        Vector3 forward = transform.forward * move;
+        rb.MovePosition(rb.position + forward);
 
         if (animator != null)
         {
@@ -108,13 +107,29 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0); // Clamp at 0
+
         if (healthBar != null)
             healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene(endScene);
+            // Cancel GetHit if queued or mid-play
+            animator.ResetTrigger("GetHit");
+
+            // Trigger Death animation
+            animator.SetTrigger("Death");
+
+            // Lock down movement and input
+            Death();
+        }
+        else
+        {
+            // Brief flinch animation
+            animator.SetTrigger("GetHit");
         }
     }
 
@@ -124,5 +139,36 @@ public class Player : MonoBehaviour
         {
             TakeDamage(15);
         }
+        if (other.CompareTag("Bullet"))
+            {
+            Destroy(other.gameObject);
+        }
     }
+
+
+
+    public void Death()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        if (animator != null)
+            animator.SetTrigger("Death");
+
+        moveSpeed = 0;
+        rotateSpeed = 0;
+        rb.velocity = Vector3.zero;
+
+        joystick = null;
+        jumpButton = null;
+
+        //StartCoroutine(DeathSequence());
+    }
+
+    //private IEnumerator DeathSequence()
+    //{
+    //    yield return new WaitForSeconds(2f); // Adjust for your animation length
+    //    SceneManager.LoadScene(endScene);
+    //}
 }
+
