@@ -7,40 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour
 {
-    public Text timer;
+    public Text timer; 
     public float time;
-    public string loadLevel;
+    private string loadLevel;
 
-
-    private void Start()
+    private void Update()
     {
-        StartCountDownTimer();
-    }
-
-    void StartCountDownTimer()
-    {
-        timer.text = "TimeLeft: ";
-        InvokeRepeating("UpdateTimer", 0.0f, 0.01667f);
-    }
-
-    void UpdateTimer()
-    {
-        if (timer != null)
+        if (time > 0)
         {
             time -= Time.deltaTime;
+
             string minutes = Mathf.Floor(time / 60).ToString("00");
             string seconds = Mathf.Floor(time % 60).ToString("00");
-            string fraction = Mathf.Floor((time * 100) % 100).ToString("000");
+            string fraction = Mathf.Floor((time * 100) % 100).ToString("00");
             timer.text = "Time Left: " + minutes + ":" + seconds + ":" + fraction;
         }
-
-        if (time <= 0)
+        else
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1); // or SceneManager.LoadScene(loadLevel);
         }
-
-
     }
-
-
 }
