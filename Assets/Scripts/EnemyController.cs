@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     private float shootTimer;
     private bool isShooting;
     private bool isDead;
-
+    private bool isPlayerDead;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (animator.GetBool("isDead"))
+        if (animator.GetBool("isDead") || isPlayerDead)
             return;
 
         float distance = Vector3.Distance(transform.position, player.position);
@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
                 Shoot();
                 shootTimer = 0f;
             }
+            
         }
         else if (distance <= detectionRange)
         {
@@ -55,6 +56,13 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("isShooting", false);
             animator.SetBool("isRunning", false);
         }
+    }
+
+    public void SetPlayerDead()
+    {
+        isPlayerDead = true;
+        animator.SetBool("isShooting", false);
+        animator.SetBool("isRunning", false);
     }
 
     private void LookAtPlayer()

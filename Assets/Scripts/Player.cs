@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     private bool isDead = false;
 
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -162,13 +163,24 @@ public class Player : MonoBehaviour
         joystick = null;
         jumpButton = null;
 
-        //StartCoroutine(DeathSequence());
+        // call for the enemies to stop shooting because player is dead (This will help with redundancies)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.SetPlayerDead();
+            }
+        }
+
+        StartCoroutine(DeathSequence());
     }
 
-    //private IEnumerator DeathSequence()
-    //{
-    //    yield return new WaitForSeconds(2f); // Adjust for your animation length
-    //    SceneManager.LoadScene(endScene);
-    //}
+    private IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(2f); // Adjust for your animation length
+        SceneManager.LoadScene(1);
+    }
 }
 

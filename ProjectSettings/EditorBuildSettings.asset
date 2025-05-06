@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: a0643ebbed5ccf8409353aa89a4a67dc
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 479fd22ffe55a8e46bd1b92ca4c5dcb6
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 8494839cd1a716f418f04e0058572d0b, type: 2}
