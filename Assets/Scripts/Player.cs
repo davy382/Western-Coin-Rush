@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private bool isGrounded = true; // looking for ground to make sure can jump
 
     private bool isDead = false;
+    public AudioSource collectSound;
 
 
     void Start()
@@ -40,16 +41,15 @@ public class Player : MonoBehaviour
         MovePlayer();
         UpdateHealth();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(15);
-        }
-
         if ((jumpButton != null && jumpButton.Pressed) || Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+
+
     }
+
+
 
     private void MovePlayer()
     {
@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
         }
+
     }
 
 
@@ -144,6 +145,11 @@ public class Player : MonoBehaviour
             {
             Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("Coin"))
+        {
+            collectSound.Play();
+        }
     }
 
 
@@ -180,7 +186,7 @@ public class Player : MonoBehaviour
     private IEnumerator DeathSequence()
     {
         yield return new WaitForSeconds(2f); // Adjust for your animation length
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }
 

@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     private bool isShooting;
     private bool isDead;
     private bool isPlayerDead;
+    public AudioSource ShootSound;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -84,6 +85,7 @@ public class EnemyController : MonoBehaviour
     {
         if (bulletPrefab != null && firePoint != null)
         {
+            ShootSound.Play();
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CollectCoin : MonoBehaviour
 {
 
-    public AudioSource collectSound;
+    //public AudioSource collectSound;
     public int scoreAmount;
     public float spinSpeed = 90f;
 
@@ -19,7 +19,7 @@ public class CollectCoin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            collectSound.Play();
+            //collectSound.Play();
             ScoringSystem.theScore += scoreAmount;
             Destroy(gameObject);
         }
