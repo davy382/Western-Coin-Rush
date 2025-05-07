@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public Player pc;
     public string nextSceneName;
 
+    public GameObject pauseMenu;
+    public GameObject resume;
+
     void Awake()
     {
         if (!gm)
@@ -39,6 +42,19 @@ public class GameManager : MonoBehaviour
             levelComplete = true;
             LevelPassed();
         }
+    }
+
+
+    public void PausedGame()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
     }
 
     void LevelPassed()
