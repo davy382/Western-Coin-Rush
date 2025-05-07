@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private bool isDead = false;
     public AudioSource collectSound;
 
+    public string GameOver = "GameOver";
+
 
     void Start()
     {
@@ -84,8 +86,8 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
             isGrounded = false;
-            if (animator != null)
-                animator.SetTrigger("Jump");
+            //if (animator != null)
+            //    animator.SetTrigger("Jump");
         }
     }
 
@@ -186,7 +188,7 @@ public class Player : MonoBehaviour
     private IEnumerator DeathSequence()
     {
         yield return new WaitForSeconds(2f); // Adjust for your animation length
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(GameOver);
     }
 }
 

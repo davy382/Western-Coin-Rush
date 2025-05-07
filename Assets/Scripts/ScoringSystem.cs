@@ -10,6 +10,11 @@ public class ScoringSystem : MonoBehaviour
     //public AudioSource collectSound;
 
 
+    private void Start()
+    {
+        theScore = 0;
+    }
+
     void Update()
     {
         //collectSound.Play();
