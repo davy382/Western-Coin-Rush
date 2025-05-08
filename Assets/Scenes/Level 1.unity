@@ -3581,6 +3581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 666530519}
   time: 120
+  GameOver: GameOver
 --- !u!1001 &510690377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5270,7 +5271,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.59357, y: 0.59357, z: 0.59357}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1284593536}
   m_Father: {fileID: 1447121074}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -7196,7 +7198,7 @@ PrefabInstance:
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.411
+      value: 4.419
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05,
         type: 3}
@@ -8729,7 +8731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1752, y: -61.645}
+  m_AnchoredPosition: {x: 1654, y: -61.645}
   m_SizeDelta: {x: 286.573, y: 78.711}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202711825
@@ -8787,6 +8789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1202711823}
+  LvlGoal: 10
 --- !u!1 &1206282034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2282663343413760109, guid: 7f124d3cf7aea204fb73e9d9578e3ca6,
@@ -9449,14 +9452,14 @@ RectTransform:
   m_GameObject: {fileID: 1284593535}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.1888385, y: 3.1888385, z: 3.1888385}
+  m_LocalScale: {x: 5.372304, y: 5.372304, z: 5.372304}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1447121074}
+  m_Father: {fileID: 666530521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18, y: 412}
+  m_AnchoredPosition: {x: 0.5145397, y: 111.19171}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1284593537
@@ -10910,7 +10913,6 @@ RectTransform:
   - {fileID: 59533240}
   - {fileID: 1202711824}
   - {fileID: 1407004612}
-  - {fileID: 1284593536}
   - {fileID: 666530521}
   - {fileID: 381734428}
   - {fileID: 241640629}

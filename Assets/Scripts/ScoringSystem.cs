@@ -7,6 +7,7 @@ public class ScoringSystem : MonoBehaviour
 {
     public GameObject scoreText;
     public static int theScore;
+    public string LvlGoal;
     //public AudioSource collectSound;
 
 
@@ -19,7 +20,7 @@ public class ScoringSystem : MonoBehaviour
     {
         //collectSound.Play();
         //theScore += 1;
-        scoreText.GetComponent<Text>().text = "" + theScore;
+        scoreText.GetComponent<Text>().text = "" + theScore + "/" + LvlGoal;
 
     }
 

@@ -10,6 +10,7 @@ public class CountDownTimer : MonoBehaviour
     public Text timer; 
     public float time;
     private string loadLevel;
+    public string GameOver = "GameOver";
 
     private void Update()
     {
@@ -24,7 +25,7 @@ public class CountDownTimer : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(1); 
+            SceneManager.LoadScene(GameOver);
         }
     }
 }
