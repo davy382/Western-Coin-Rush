@@ -20,11 +20,11 @@ public class CountDownTimer : MonoBehaviour
             string minutes = Mathf.Floor(time / 60).ToString("00");
             string seconds = Mathf.Floor(time % 60).ToString("00");
             string fraction = Mathf.Floor((time * 100) % 100).ToString("00");
-            timer.text = "Time Left: " + minutes + ":" + seconds + ":" + fraction;
+            timer.text = "" + minutes + ":" + seconds + ":" + fraction;
         }
         else
         {
-            SceneManager.LoadScene(1); // or SceneManager.LoadScene(loadLevel);
+            SceneManager.LoadScene(1); 
         }
     }
 }

@@ -19,7 +19,7 @@ public class ScoringSystem : MonoBehaviour
     {
         //collectSound.Play();
         //theScore += 1;
-        scoreText.GetComponent<Text>().text = "Score: " + theScore;
+        scoreText.GetComponent<Text>().text = "" + theScore;
 
     }
 

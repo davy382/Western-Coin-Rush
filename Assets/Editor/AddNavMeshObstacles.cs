@@ -16,6 +16,6 @@ public class AddNavMeshObstacles : EditorWindow
             }
         }
 
-        Debug.Log("✅ NavMeshObstacle with Carving added to selected GameObjects.");
+        Debug.Log("NavMeshObstacle with Carving added to selected GameObjects.");
     }
 }
